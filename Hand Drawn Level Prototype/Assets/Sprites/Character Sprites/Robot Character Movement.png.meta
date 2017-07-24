@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 164f34fba30e6e9439f5c9e2eadd30c3
-timeCreated: 1500343633
+guid: dd7f2f267175949488fdccaec5ea4b83
+timeCreated: 1500929728
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Robot Character Movement 2_0
-    21300002: Robot Character Movement 2_1
-    21300004: Robot Character Movement 2_2
-    21300006: Robot Character Movement 2_3
-    21300008: Robot Character Movement 2_4
-    21300010: Robot Character Movement 2_5
-    21300012: Robot Character Movement 2_6
-    21300014: Robot Character Movement 2_7
-    21300016: Robot Character Movement 2_8
-    21300018: Robot Character Movement 2_9
-    21300020: Robot Character Movement 2_10
-    21300022: Robot Character Movement 2_11
-    21300024: Robot Character Movement 2_12
-    21300026: Robot Character Movement 2_13
-    21300028: Robot Character Movement 2_14
-    21300030: Robot Character Movement 2_15
-    21300032: Robot Character Movement 2_16
-    21300034: Robot Character Movement 2_17
-    21300036: Robot Character Movement 2_18
-    21300038: Robot Character Movement 2_19
-    21300040: Robot Character Movement 2_20
-    21300042: Robot Character Movement 2_21
+    21300000: Robot Character Movement_0
+    21300002: Robot Character Movement_1
+    21300004: Robot Character Movement_2
+    21300006: Robot Character Movement_3
+    21300008: Robot Character Movement_4
+    21300010: Robot Character Movement_5
+    21300012: Robot Character Movement_6
+    21300014: Robot Character Movement_7
+    21300016: Robot Character Movement_8
+    21300018: Robot Character Movement_9
+    21300020: Robot Character Movement_10
+    21300022: Robot Character Movement_11
+    21300024: Robot Character Movement_12
+    21300026: Robot Character Movement_13
+    21300028: Robot Character Movement_14
+    21300030: Robot Character Movement_15
+    21300032: Robot Character Movement_16
+    21300034: Robot Character Movement_17
+    21300036: Robot Character Movement_18
+    21300038: Robot Character Movement_19
+    21300040: Robot Character Movement_20
+    21300042: Robot Character Movement_21
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -92,7 +92,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Robot Character Movement 2_0
+      name: Robot Character Movement_0
       rect:
         serializedVersion: 2
         x: 17
@@ -105,7 +105,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_1
+      name: Robot Character Movement_1
       rect:
         serializedVersion: 2
         x: 57
@@ -118,7 +118,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_2
+      name: Robot Character Movement_2
       rect:
         serializedVersion: 2
         x: 105
@@ -131,7 +131,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_3
+      name: Robot Character Movement_3
       rect:
         serializedVersion: 2
         x: 149
@@ -144,7 +144,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_4
+      name: Robot Character Movement_4
       rect:
         serializedVersion: 2
         x: 196
@@ -157,7 +157,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_5
+      name: Robot Character Movement_5
       rect:
         serializedVersion: 2
         x: 242
@@ -170,7 +170,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_6
+      name: Robot Character Movement_6
       rect:
         serializedVersion: 2
         x: 280
@@ -183,7 +183,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_7
+      name: Robot Character Movement_7
       rect:
         serializedVersion: 2
         x: 322
@@ -196,7 +196,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_8
+      name: Robot Character Movement_8
       rect:
         serializedVersion: 2
         x: 371
@@ -209,7 +209,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_9
+      name: Robot Character Movement_9
       rect:
         serializedVersion: 2
         x: 409
@@ -222,7 +222,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_10
+      name: Robot Character Movement_10
       rect:
         serializedVersion: 2
         x: 455
@@ -235,7 +235,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_11
+      name: Robot Character Movement_11
       rect:
         serializedVersion: 2
         x: 496
@@ -248,7 +248,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_12
+      name: Robot Character Movement_12
       rect:
         serializedVersion: 2
         x: 10
@@ -261,7 +261,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_13
+      name: Robot Character Movement_13
       rect:
         serializedVersion: 2
         x: 71
@@ -274,7 +274,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_14
+      name: Robot Character Movement_14
       rect:
         serializedVersion: 2
         x: 137
@@ -287,7 +287,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_15
+      name: Robot Character Movement_15
       rect:
         serializedVersion: 2
         x: 197
@@ -300,7 +300,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_16
+      name: Robot Character Movement_16
       rect:
         serializedVersion: 2
         x: 247
@@ -313,7 +313,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_17
+      name: Robot Character Movement_17
       rect:
         serializedVersion: 2
         x: 302
@@ -326,7 +326,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_18
+      name: Robot Character Movement_18
       rect:
         serializedVersion: 2
         x: 359
@@ -339,7 +339,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_19
+      name: Robot Character Movement_19
       rect:
         serializedVersion: 2
         x: 429
@@ -352,7 +352,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_20
+      name: Robot Character Movement_20
       rect:
         serializedVersion: 2
         x: 486
@@ -365,7 +365,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Robot Character Movement 2_21
+      name: Robot Character Movement_21
       rect:
         serializedVersion: 2
         x: 534
