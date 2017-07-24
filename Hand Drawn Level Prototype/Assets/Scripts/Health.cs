@@ -17,7 +17,7 @@ public class Health : MonoBehaviour {
         healthPoints -= damage;
         if (healthPoints<0.0) {
             onDie();
-            Destroy(this, timeToDie);
+            Destroy(this.gameObject, timeToDie);
         }
     }
 }
