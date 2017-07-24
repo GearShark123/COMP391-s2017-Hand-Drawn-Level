@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AimPlayerBehaviour : MonoBehaviour {
 
+    public float timeToAimTarget = 1.0f;
+
     private float t;
     private Transform joint;
 
@@ -36,7 +38,7 @@ public class AimPlayerBehaviour : MonoBehaviour {
             float targetAngle = Vector3.Angle(Vector3.left, direction);
             t += Time.deltaTime;
             float currentAngle = Vector3.Angle(Vector3.left, joint.right);
-            joint.Rotate(Vector3.forward, Mathf.Lerp(currentAngle, targetAngle, Mathf.Clamp(t, 0.0f, 1.0f))- currentAngle);
+            joint.Rotate(Vector3.forward, Mathf.Lerp(currentAngle, targetAngle, Mathf.Clamp(t, 0.0f, timeToAimTarget))- currentAngle);
             Debug.DrawRay(joint.position, direction,Color.white);
         }
     }
