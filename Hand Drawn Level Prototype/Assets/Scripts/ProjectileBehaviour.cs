@@ -35,7 +35,7 @@ public class ProjectileBehaviour : MonoBehaviour {
     }
 
     private void HandlePlayerCollision(Collider2D collision) {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
         {
             Health health = collision.GetComponent<Health>();
             health.DamageTaken(damage, 0.0f, () => Destroy(this.gameObject));
