@@ -15,6 +15,7 @@ public class PlayerControls : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Transform armJoint;
     private GunBehaviour gun;
+    private float hSpeed = 0.0f;
 
     void Start()
     {
@@ -47,7 +48,7 @@ public class PlayerControls : MonoBehaviour
         }   
 
         // Returns the value of the virtual axis identified by axisName.
-        float hSpeed = Input.GetAxis("Horizontal")*speed;
+        hSpeed = Input.GetAxis("Horizontal")*speed;
         // Object move
         GetComponent<Rigidbody2D>().velocity = new Vector2(hSpeed, GetComponent<Rigidbody2D>().velocity.y);
         // Animation walk
@@ -70,6 +71,12 @@ public class PlayerControls : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
             Vector3 direction = mousePosition - transform.position;
             float mouseAngle = Mathf.Atan2(direction.y, direction.x);
+            float cosAngle = Mathf.Cos(mouseAngle);
+            if (cosAngle!=0) {
+                spriteRenderer.flipX = cosAngle<0;
+            }
+            bool isReverse = hSpeed > 0 && cosAngle<0 || hSpeed < 0 && cosAngle > 0;
+            Debug.Log("isReverse" + isReverse);
             armJoint.localRotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * mouseAngle);
             Debug.DrawRay(transform.position, direction);
             if (Input.GetButtonUp("Fire1")) {
