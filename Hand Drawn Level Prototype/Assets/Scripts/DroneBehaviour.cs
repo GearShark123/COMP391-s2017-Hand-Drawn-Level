@@ -11,14 +11,38 @@ public class DroneBehaviour : MonoBehaviour {
     private Transform joint;
     private GunBehaviour gun;
     private float currentTimeToShoot;
+    private Vector3 direction = Vector3.right;
+    private bool isPlayerInArea;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         t = 0.0f;
         joint = transform.FindChild("Joint");
         gun = transform.GetComponentInChildren<GunBehaviour>();
         currentTimeToShoot = 0.0f;
+        isPlayerInArea = false;
 
+    }
+    public void Update()
+    {
+        t += Time.deltaTime;
+        if (isPlayerInArea)
+            currentTimeToShoot += Time.deltaTime;
+        float b = Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x);
+        float a = Mathf.Rad2Deg * Mathf.Atan2(joint.right.y, joint.right.x);
+        /*if (b < 0)
+            b += 360;
+        if (a < 0)
+            a += 360;*/
+        float zRotation = Mathf.LerpAngle(a, b, Mathf.Clamp(t, 0.0f, timeToAimTarget) / timeToAimTarget);
+
+        joint.localRotation = Quaternion.Euler(0, 0, zRotation);
+        if (isPlayerInArea && timeToShoot < currentTimeToShoot)
+        {
+            gun.Shoot();
+            currentTimeToShoot = 0.0f;
+            isPlayerInArea = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,6 +50,8 @@ public class DroneBehaviour : MonoBehaviour {
         if (collision.CompareTag("Player"))
         {
             t = 0.0f;
+            currentTimeToShoot = 0.0f;
+            isPlayerInArea = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -33,6 +59,8 @@ public class DroneBehaviour : MonoBehaviour {
         if (collision.CompareTag("Player"))
         {
             t = 0.0f;
+            currentTimeToShoot = 0.0f;
+            isPlayerInArea = false;
         }
     }
 
@@ -40,16 +68,8 @@ public class DroneBehaviour : MonoBehaviour {
     {
         if (collision.CompareTag("Player"))
         {
-            Vector3 direction = collision.transform.position - joint.position;
-            float targetAngle = Vector3.Angle(Vector3.left, direction);
-            t += Time.deltaTime;
-            currentTimeToShoot += Time.deltaTime;
-            float currentAngle = Vector3.Angle(Vector3.left, joint.right);
-            joint.Rotate(Vector3.forward, Mathf.Lerp(currentAngle, targetAngle, Mathf.Clamp(t, 0.0f, timeToAimTarget)/timeToAimTarget)- currentAngle);
-            if (timeToShoot < currentTimeToShoot) {
-                gun.Shoot();
-                currentTimeToShoot = 0.0f;
-            }
+            direction = collision.transform.position - joint.position;
+            isPlayerInArea = true;
             Debug.DrawRay(joint.position, direction,Color.white);
         }
     }
