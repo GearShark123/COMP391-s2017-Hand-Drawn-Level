@@ -6,6 +6,8 @@ using UnityEngine;
 public class PortalSummonBehaviour : MonoBehaviour {
 
     public float timeToDash = .5f;
+    public GameObject portal;
+
     private float currentTime;
     private Vector2 dashDirection = Vector2.zero;
 	// Use this for initialization
@@ -71,5 +73,7 @@ public class PortalSummonBehaviour : MonoBehaviour {
     private void Dash(Vector2 direction)
     {
         Debug.Log("Dash " + direction.ToString());
+
+        Instantiate(portal, transform.position + (Vector3)direction, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x)));
     }
 }
