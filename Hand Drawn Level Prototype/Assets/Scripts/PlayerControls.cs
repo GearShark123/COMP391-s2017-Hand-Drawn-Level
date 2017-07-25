@@ -39,7 +39,7 @@ public class PlayerControls : MonoBehaviour
         }   
 
         // Returns the value of the virtual axis identified by axisName.
-        float hSpeed = Input.GetAxis("Horizontal");
+        float hSpeed = Input.GetAxis("Horizontal")*Speed;
         // Object move
         GetComponent<Rigidbody2D>().velocity = new Vector2(hSpeed, GetComponent<Rigidbody2D>().velocity.y);
         // Animation walk
