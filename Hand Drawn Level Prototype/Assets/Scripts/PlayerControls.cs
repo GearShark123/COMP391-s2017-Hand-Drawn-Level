@@ -81,9 +81,10 @@ public class PlayerControls : MonoBehaviour
                 spriteRenderer.flipX = cosAngle < 0;
             }
 
-            bool isReverse = hSpeed > 0 && cosAngle < 0 || hSpeed < 0 && cosAngle > 0;
+            bool isReverse = hSpeed > 0 && cosAngle < 0 || hSpeed < 0 && cosAngle > 0;          
+            myAnimator.SetBool("isReverse", isReverse);
             Debug.Log("isReverse" + isReverse);
-            print(isReverse);
+            print(cosAngle);
 
             armJoint.localRotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * mouseAngle);
             Debug.DrawRay(transform.position, direction);
