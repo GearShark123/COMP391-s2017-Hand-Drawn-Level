@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour 
 {
-    [SerializeField]
-    public float Speed = 10.0f;
-    [SerializeField]
+    public float speed = 10.0f;
     public float jumpSpeed = 0.2f;
-    private float myTime = 1.0f;
-    private const float nextJump = 1.0f;
     public LayerMask GroundLayers;
 
+    private float myTime = 1.0f;
+    private const float nextJump = 1.0f;
     private Animator myAnimator;
     private Transform myGroundCheck;
     private SpriteRenderer spriteRenderer;
+    private Transform armJoint;
+    private GunBehaviour gun;
 
     void Start()
     {
@@ -22,6 +22,14 @@ public class PlayerControls : MonoBehaviour
         // The Transform attached to this GameObject.
         myGroundCheck = transform.FindChild("GroundCheck");
         spriteRenderer = GetComponent<SpriteRenderer>();
+        armJoint = transform.FindChild("Joint");
+        if (armJoint)
+            gun = armJoint.GetComponentInChildren<GunBehaviour>();
+    }
+
+    private void Update()
+    {
+        UpdateArm();
     }
 
     void FixedUpdate()
@@ -39,7 +47,7 @@ public class PlayerControls : MonoBehaviour
         }   
 
         // Returns the value of the virtual axis identified by axisName.
-        float hSpeed = Input.GetAxis("Horizontal")*Speed;
+        float hSpeed = Input.GetAxis("Horizontal")*speed;
         // Object move
         GetComponent<Rigidbody2D>().velocity = new Vector2(hSpeed, GetComponent<Rigidbody2D>().velocity.y);
         // Animation walk
@@ -55,8 +63,19 @@ public class PlayerControls : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-
     }
 
+    private void UpdateArm() {
+        if (armJoint) {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+            Vector3 direction = mousePosition - transform.position;
+            float mouseAngle = Mathf.Atan2(direction.y, direction.x);
+            armJoint.localRotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * mouseAngle);
+            Debug.DrawRay(transform.position, direction);
+            if (Input.GetButtonUp("Fire1")) {
+                gun.Shoot();
+            }
+        }
+    }
 }
 
