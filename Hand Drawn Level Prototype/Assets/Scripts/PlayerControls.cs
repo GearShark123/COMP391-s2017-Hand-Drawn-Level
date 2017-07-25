@@ -40,7 +40,7 @@ public class PlayerControls : MonoBehaviour
         bool isGrounded = Physics2D.OverlapPoint(myGroundCheck.position, GroundLayers);
         myAnimator.SetBool("isGrounded", isGrounded);
 
-        if (Input.GetKey(KeyCode.W) && myTime > nextJump)
+        if (Input.GetKey(KeyCode.W) && myTime > nextJump && isGrounded)
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             isGrounded = false;
