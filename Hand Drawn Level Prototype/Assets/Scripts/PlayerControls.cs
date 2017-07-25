@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControls : MonoBehaviour 
+public class PlayerControls : MonoBehaviour
 {
     public float speed = 10.0f;
     public float jumpSpeed = 0.2f;
@@ -38,21 +38,21 @@ public class PlayerControls : MonoBehaviour
         //print(myTime);
         myTime += Time.deltaTime;
         bool isGrounded = Physics2D.OverlapPoint(myGroundCheck.position, GroundLayers);
-        myAnimator.SetBool("IsGrounded", isGrounded);
+        myAnimator.SetBool("isGrounded", isGrounded);
 
-        if (Input.GetButton("Jump") && myTime > nextJump)
+        if (Input.GetKey(KeyCode.W) && myTime > nextJump)
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-            isGrounded = false;            
+            isGrounded = false;
             myTime = 0.0f;
-        }   
+        }
 
         // Returns the value of the virtual axis identified by axisName.
-        hSpeed = Input.GetAxis("Horizontal")*speed;
+        hSpeed = Input.GetAxis("Horizontal") * speed;
         // Object move
         GetComponent<Rigidbody2D>().velocity = new Vector2(hSpeed, GetComponent<Rigidbody2D>().velocity.y);
         // Animation walk
-        myAnimator.SetFloat("Speed", Mathf.Abs(hSpeed));  // Mathf.Abs - Returns the absolute value of f.
+        myAnimator.SetFloat("speed", Mathf.Abs(hSpeed));  // Mathf.Abs - Returns the absolute value of f.
 
         // Turn sprite left
         if (hSpeed < 0)
@@ -66,20 +66,30 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    private void UpdateArm() {
-        if (armJoint) {
+    private void UpdateArm()
+    {
+        if (armJoint)
+        {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
             Vector3 direction = mousePosition - transform.position;
+
             float mouseAngle = Mathf.Atan2(direction.y, direction.x);
             float cosAngle = Mathf.Cos(mouseAngle);
-            if (cosAngle!=0) {
-                spriteRenderer.flipX = cosAngle<0;
+
+            if (cosAngle != 0)
+            {
+                spriteRenderer.flipX = cosAngle < 0;
             }
-            bool isReverse = hSpeed > 0 && cosAngle<0 || hSpeed < 0 && cosAngle > 0;
+
+            bool isReverse = hSpeed > 0 && cosAngle < 0 || hSpeed < 0 && cosAngle > 0;
             Debug.Log("isReverse" + isReverse);
+            print(isReverse);
+
             armJoint.localRotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * mouseAngle);
             Debug.DrawRay(transform.position, direction);
-            if (Input.GetButtonUp("Fire1")) {
+
+            if (Input.GetButtonUp("Fire1"))
+            {
                 gun.Shoot();
             }
         }
