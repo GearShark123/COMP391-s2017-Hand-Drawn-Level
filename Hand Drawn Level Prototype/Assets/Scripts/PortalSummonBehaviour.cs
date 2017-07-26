@@ -8,12 +8,16 @@ public class PortalSummonBehaviour : MonoBehaviour {
     public float timeToDash = .5f;
     public PortalBehaviour portal;
     public float distanceToSummon = .5f;
+    public float timeBetweenDashes = 1.0f;
 
     private float currentTime;
     private Vector2 dashDirection = Vector2.zero;
-	// Use this for initialization
-	void Start () {
+    private float lastTimeDash;
+
+    // Use this for initialization
+    void Start () {
         currentTime = 0;
+        lastTimeDash = Time.timeSinceLevelLoad;
 	}
 	
 	// Update is called once per frame
@@ -73,7 +77,11 @@ public class PortalSummonBehaviour : MonoBehaviour {
 
     private void Dash(Vector2 direction)
     {
-        GameObject temp = Instantiate(portal.gameObject, transform.position + (Vector3)direction*distanceToSummon, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x)));
-        temp.GetComponent<PortalBehaviour>().direction = direction;
+        if (Time.timeSinceLevelLoad - lastTimeDash > timeBetweenDashes)
+        {
+            GameObject temp = Instantiate(portal.gameObject, transform.position + (Vector3)direction * distanceToSummon, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x)));
+            temp.GetComponent<PortalBehaviour>().direction = direction;
+            lastTimeDash = Time.timeSinceLevelLoad;
+        }
     }
 }
