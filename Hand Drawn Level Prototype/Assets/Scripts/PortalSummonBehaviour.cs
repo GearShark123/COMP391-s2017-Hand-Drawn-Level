@@ -73,8 +73,6 @@ public class PortalSummonBehaviour : MonoBehaviour {
 
     private void Dash(Vector2 direction)
     {
-        Debug.Log("Dash " + direction.ToString());
-
         GameObject temp = Instantiate(portal.gameObject, transform.position + (Vector3)direction*distanceToSummon, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x)));
         temp.GetComponent<PortalBehaviour>().direction = direction;
     }
