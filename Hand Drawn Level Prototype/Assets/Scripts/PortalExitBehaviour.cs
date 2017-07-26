@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PortalExitBehaviour : MonoBehaviour {
 
+    [HideInInspector]
     public float distance;
     public float speed = 10.0f;
-    public Vector3 direction;
     public float timeToDestroy = 0.7f;
 
     private Vector3 initialPosition;
@@ -22,13 +22,13 @@ public class PortalExitBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         if ((transform.position - initialPosition).magnitude < distance)
-            transform.position += direction * speed * Time.deltaTime;
+            transform.position += transform.right.normalized * speed * Time.deltaTime;
         else
         {
             if (Player)
             {
                 Player.SetActive(true);
-                Player.transform.position = transform.position + direction;
+                Player.transform.position = transform.position + transform.right.normalized;
             }
         }
 	}

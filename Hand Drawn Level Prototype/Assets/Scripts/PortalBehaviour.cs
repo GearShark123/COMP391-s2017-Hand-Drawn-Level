@@ -25,10 +25,9 @@ public class PortalBehaviour : MonoBehaviour {
     }
 
     private void CreateExit() {
-        GameObject temp = Instantiate(exitPortal.gameObject, transform.position, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) + 90));
+        GameObject temp = Instantiate(exitPortal.gameObject, transform.position, transform.rotation);
         currentExitPortal = temp.GetComponent<PortalExitBehaviour>();
         currentExitPortal.distance = distance;
-        currentExitPortal.direction = direction;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
