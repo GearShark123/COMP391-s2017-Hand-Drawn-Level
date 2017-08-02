@@ -15,7 +15,7 @@ public class ProjectileBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        Vector3 direction = -transform.up.normalized;
+        Vector3 direction = transform.right.normalized;
         transform.position += direction * speed * Time.deltaTime;
 	}
 
