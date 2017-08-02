@@ -10,11 +10,11 @@ public class WeaponPortalControls : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.Mouse1))
         {
-            weapon.SetActive = true;
+            weapon.SetActive(true);
         }
         else
         {
-            weapon.SetActive = false;
+            weapon.SetActive(false);
         }
     }
 }
