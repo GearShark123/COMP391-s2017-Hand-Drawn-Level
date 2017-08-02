@@ -12,7 +12,8 @@ public class PlayerControls : MonoBehaviour
     private const float nextJump = 1.0f;
     private Animator myAnimator;
     private Transform myGroundCheck;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer playerSpriteRenderer;
+    private SpriteRenderer armSpriteRenderer;
     private Transform armJoint;
     private GunBehaviour gun;
     private float hSpeed = 0.0f;
@@ -22,10 +23,13 @@ public class PlayerControls : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         // The Transform attached to this GameObject.
         myGroundCheck = transform.FindChild("GroundCheck");
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
         armJoint = transform.FindChild("Joint");
         if (armJoint)
+        {
             gun = armJoint.GetComponentInChildren<GunBehaviour>();
+            armSpriteRenderer = gun.GetComponent<SpriteRenderer>();
+        }
     }
 
     private void Update()
@@ -57,12 +61,14 @@ public class PlayerControls : MonoBehaviour
         // Turn sprite left
         if (hSpeed < 0)
         {
-            spriteRenderer.flipX = true;
+            playerSpriteRenderer.flipX = true;
+            armSpriteRenderer.flipX = true;
         }
         // Turn sprite right
         else if (hSpeed > 0)
         {
-            spriteRenderer.flipX = false;
+            playerSpriteRenderer.flipX = false;
+            armSpriteRenderer.flipX = false;
         }
     }
 
@@ -78,7 +84,8 @@ public class PlayerControls : MonoBehaviour
 
             if (cosAngle != 0)
             {
-                spriteRenderer.flipX = cosAngle < 0;
+                playerSpriteRenderer.flipX = cosAngle < 0;
+                armSpriteRenderer.flipX = playerSpriteRenderer.flipX;
             }
 
             bool isReverse = hSpeed > 0 && cosAngle < 0 || hSpeed < 0 && cosAngle > 0;          
