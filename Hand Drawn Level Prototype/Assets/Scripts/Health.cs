@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour {
 
-    public float healthPoints = 1.0f;
+    public float healthPoints; 
 
     private bool IsImmune { set; get; }
 
@@ -17,9 +17,11 @@ public class Health : MonoBehaviour {
 
     public void DamageTaken(float damage, float timeToDie, Action onDie) {
         if (IsImmune) return;
-
+        // print(healthPoints);
         healthPoints -= damage;
-        if (healthPoints<0.0) {
+        // print(healthPoints);
+        if (healthPoints<0.0)
+        {
             onDie();
             Destroy(this.gameObject, timeToDie);
         }
