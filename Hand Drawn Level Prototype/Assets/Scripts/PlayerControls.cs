@@ -94,6 +94,8 @@ public class PlayerControls : MonoBehaviour
             armJoint.localRotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * mouseAngle);
             Debug.DrawRay(transform.position, direction);
 
+            gun.Aim(Input.GetButton("Fire1"));
+
             if (Input.GetButtonUp("Fire1"))
             {
                 gun.Shoot();
