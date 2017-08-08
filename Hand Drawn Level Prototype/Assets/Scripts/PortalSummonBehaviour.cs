@@ -24,7 +24,7 @@ public class PortalSummonBehaviour : MonoBehaviour {
 	void Update ()
     {
         currentTime += Time.deltaTime;
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             if (dashDirection.Equals(Vector2.left))// is it double left?
             {
@@ -39,7 +39,7 @@ public class PortalSummonBehaviour : MonoBehaviour {
                 dashDirection = Vector2.left;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
             if (dashDirection.Equals(Vector2.right))// is it double right?
             {
@@ -54,7 +54,7 @@ public class PortalSummonBehaviour : MonoBehaviour {
                 dashDirection = Vector2.right;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.W))
         {
             if (dashDirection.Equals(Vector2.up))// is it double up?
             {
