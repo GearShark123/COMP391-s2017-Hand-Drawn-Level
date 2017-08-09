@@ -22,9 +22,9 @@ public class PlayerControls : MonoBehaviour
     {
         myAnimator = GetComponent<Animator>();
         // The Transform attached to this GameObject.
-        myGroundCheck = transform.FindChild("GroundCheck");
+        myGroundCheck = transform.Find("GroundCheck");
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
-        armJoint = transform.FindChild("Joint");
+        armJoint = transform.Find("Joint");
         if (armJoint)
         {
             gun = armJoint.GetComponentInChildren<GunBehaviour>();

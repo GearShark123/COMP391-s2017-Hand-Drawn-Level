@@ -17,7 +17,7 @@ public class DroneBehaviour : MonoBehaviour {
     // Use this for initialization
     void Start () {
         t = 0.0f;
-        joint = transform.FindChild("Joint");
+        joint = transform.Find("Joint");
         gun = transform.GetComponentInChildren<GunBehaviour>();
         currentTimeToShoot = 0.0f;
         isPlayerInArea = false;
