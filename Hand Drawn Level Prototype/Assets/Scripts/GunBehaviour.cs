@@ -13,12 +13,14 @@ public class GunBehaviour : MonoBehaviour {
     {
         spwanProjectilePosition = transform.Find("SpawnProjectile");
         portal = spwanProjectilePosition.Find("Portal");
-        portal.gameObject.SetActive(isAiming);
+        if (portal)
+            portal.gameObject.SetActive(isAiming);
         joint = transform.parent;
     }
 
     public void Aim(bool isAiming) {
-        portal.gameObject.SetActive(this.isAiming=isAiming);
+        if (portal)
+            portal.gameObject.SetActive(this.isAiming=isAiming);
     }
 
     public void Shoot() {
