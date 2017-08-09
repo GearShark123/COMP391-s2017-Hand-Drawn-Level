@@ -10,17 +10,17 @@ public class ProjectileBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Destroy(this.gameObject, timeToDestroy);
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+        Destroy(this.gameObject, timeToDestroy);        
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () {
         Vector3 direction = transform.right.normalized;
         transform.position += direction * speed * Time.deltaTime;
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {       
         HandlePlayerCollision(collision);    
     }
 

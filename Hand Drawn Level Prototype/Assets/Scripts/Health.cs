@@ -17,10 +17,10 @@ public class Health : MonoBehaviour {
 
     public void DamageTaken(float damage, float timeToDie, Action onDie) {
         if (IsImmune) return;
-        // print(healthPoints);
+         //print(healthPoints);
         healthPoints -= damage;
-        // print(healthPoints);
-        if (healthPoints<0.0)
+         print(healthPoints);
+        if (healthPoints == 0f)
         {
             onDie();
             Destroy(this.gameObject, timeToDie);
