@@ -20,7 +20,7 @@ public class Health : MonoBehaviour {
          //print(healthPoints);
         healthPoints -= damage;
          print(healthPoints);
-        if (healthPoints == 0f)
+        if (healthPoints <= 0f)
         {
             onDie();
             Destroy(this.gameObject, timeToDie);
