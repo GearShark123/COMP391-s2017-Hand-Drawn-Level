@@ -39,6 +39,7 @@ public class ProjectileBehaviour : MonoBehaviour {
         {
             Health health = collision.GetComponent<Health>();
             health.DamageTaken(damage, 0.0f, () => Destroy(this.gameObject));
+            Destroy(this.gameObject);
         }
     }
 }
