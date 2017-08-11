@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 
 public class Health : MonoBehaviour
@@ -24,10 +25,15 @@ public class Health : MonoBehaviour
         if (this.gameObject.tag == "Player")
         {
             for (int i = 1; i <= damage; i++)
-            {
-                Instantiate(redScreen, playerCamera.transform);
-            }
+            {              
+                    Instantiate(redScreen, playerCamera.transform);                                        
+            }           
         }
+    }
+
+    public void HealthRegen(float healthRegenPoints)
+    {
+        healthPoints += healthRegenPoints;
     }
 
     public void DamageTaken(float damage, float timeToDie, Action onDie)
@@ -57,8 +63,7 @@ public class Health : MonoBehaviour
             onDie();
             Destroy(this.gameObject, timeToDie);
         }
-        #endregion
-
+        #endregion        
     }
 }
 
