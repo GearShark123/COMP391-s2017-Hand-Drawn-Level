@@ -13,7 +13,7 @@ public class LandmineBehaviour : MonoBehaviour {
     private void PlayerCollision(Collider2D collision)
     {
         // print(time);
-        if ((collision.CompareTag("Player") || collision.CompareTag("Enemy")))
+        if (collision.CompareTag("Player"))
         {
             Health health = collision.GetComponent<Health>();
             health.DamageTaken(damage, 0.0f, () => Destroy(collision.gameObject));
@@ -22,7 +22,7 @@ public class LandmineBehaviour : MonoBehaviour {
     }
     #endregion
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player")
         {

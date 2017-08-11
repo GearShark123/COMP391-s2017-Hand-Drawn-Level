@@ -6,7 +6,7 @@ public class ProjectileBehaviour : MonoBehaviour {
 
     public float timeToDestroy = 5.0f;
     public float speed = 1.0f;
-    public float damage = 1.0f;
+    public float damage;
 
 	// Use this for initialization
 	void Start () {
@@ -35,10 +35,10 @@ public class ProjectileBehaviour : MonoBehaviour {
     }
 
     private void HandlePlayerCollision(Collider2D collision) {
-        if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Player"))
         {
             Health health = collision.GetComponent<Health>();
-            health.DamageTaken(damage, 0.0f, () => Destroy(this.gameObject));
+            health.DamageTaken(damage, 0.0f, () => Destroy(collision.gameObject));
             Destroy(this.gameObject);
         }
     }
