@@ -19,7 +19,6 @@ public class Health : MonoBehaviour {
         if (IsImmune) return;
          //print(healthPoints);
         healthPoints -= damage;
-         print(healthPoints);
         if (healthPoints <= 0f)
         {
             onDie();
