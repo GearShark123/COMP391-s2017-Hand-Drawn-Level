@@ -33,35 +33,24 @@ public class Health : MonoBehaviour
     public void DamageTaken(float damage, float timeToDie, Action onDie)
     {
         if (IsImmune) return;
-<<<<<<< Updated upstream
-        healthPoints -= damage;
-        /* verify this code it does not seem right because it will flood the screen with game objects.
-        for (int i = 0; i <= damage; i++)
-=======
-        //print(healthPoints + "Player");
 
         #region _Red Screen_
         if (healthPoints > damage)
->>>>>>> Stashed changes
         {
-            //print(damage + ">");
+            //print(damage + " >");
             healthPoints -= damage;
             DisplayRedScreen(damage);
         }
-<<<<<<< Updated upstream
-        */
-        print(healthPoints);
-        if (healthPoints <= 0f)
-=======
         else if (healthPoints == damage)
->>>>>>> Stashed changes
+
         {
-            //print(damage + "==");
+            //print(damage + " ==");
             healthPoints -= damage;
             DisplayRedScreen(damage);
         }
         else
         {
+            //print(damage + " ?");
             healthPoints -= damage;
             damage += healthPoints;
             DisplayRedScreen(damage);
@@ -70,6 +59,7 @@ public class Health : MonoBehaviour
         }
         #endregion
 
-        //print(healthPoints + "Dmg");        
     }
 }
+
+
