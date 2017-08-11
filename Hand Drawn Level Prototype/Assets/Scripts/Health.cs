@@ -24,17 +24,14 @@ public class Health : MonoBehaviour
     public void DamageTaken(float damage, float timeToDie, Action onDie)
     {
         if (IsImmune) return;
-        //print(healthPoints);
         healthPoints -= damage;
-<<<<<<< HEAD
-=======
+        /* verify this code it does not seem right because it will flood the screen with game objects.
         for (int i = 0; i <= damage; i++)
         {
             Instantiate(redScreen, playerCamera.transform);
         }
-        //Instantiate(redScreen, playerCamera.transform);
+        */
         print(healthPoints);
->>>>>>> master
         if (healthPoints <= 0f)
         {
             onDie();
