@@ -4,37 +4,58 @@ using UnityEngine;
 
 public class Enemy1Behaviour : MonoBehaviour {
 
-    public Transform positionA;
-    public Transform positionB;
+    public Transform positionRight;
+    public Transform positionLeft;
     public float speed;
 
     private Animator animator;
     private Vector2 direction;
-    public bool isWalking;
+    private bool isWalking;
+    private GunBehaviour gun;
+    private Transform gunJoint;
 
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
-        direction = (Vector2)Vector3.Project(positionA.position - transform.position, Vector3.right).normalized;
-        positionB.parent = null;
-        positionA.parent = null;
-	}
+        direction = (Vector2)Vector3.Project(positionRight.position - transform.position, Vector3.right).normalized;
+        positionLeft.parent = null;
+        positionRight.parent = null;
+        InvokeRepeating("Walk", 0.000001f, 2.5f);
+        InvokeRepeating("Shoot", 0.000001f, 0.5f);
+        InvokeRepeating("Stop", 2.1f, 2.5f);
+        gun = GetComponentInChildren<GunBehaviour>();
+        gunJoint = gun.transform.parent;
+    }
 
     void FixedUpdate()
     {
         if (isWalking)
         {
+            //if it crosses one of the points
+            if (positionRight.position.x < transform.position.x || positionLeft.position.x > transform.position.x)
+            {
+                direction *= -1;//invert direction
+                //This kind of code is one of the reasons I avoid negative scales.
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                //The following code is necessary to make the gun rotate/position correctly
+                gunJoint.localScale = new Vector3(-gunJoint.localScale.x, gunJoint.localScale.y, gunJoint.localScale.z);
+                gunJoint.Rotate(Vector3.forward * 180.0f, Space.World);
+            }
             transform.position += (Vector3)direction * speed * Time.deltaTime;
         }
-        animator.SetBool("IsWalking", isWalking);
     }
 
-    // Update is called once per frame
-    void Update () {
-        //if it is close from one of the points
-        if ((transform.position - positionA.position).magnitude < 0.2f || (transform.position - positionB.position).magnitude < 0.2f) {
-            direction *= -1;//invert direction
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        }
-	}
+    private void Walk()
+    {
+        isWalking = true;
+        animator.SetBool("IsWalking", isWalking);
+    }
+    private void Stop()
+    {
+        isWalking = false;
+        animator.SetBool("IsWalking", isWalking);
+    }
+    private void Shoot() {
+        gun.Shoot();
+    }
 }
