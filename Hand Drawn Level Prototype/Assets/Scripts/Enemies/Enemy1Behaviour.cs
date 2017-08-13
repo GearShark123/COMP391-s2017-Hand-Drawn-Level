@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,18 +32,40 @@ public class Enemy1Behaviour : MonoBehaviour {
     {
         if (isWalking)
         {
-            //if it crosses one of the points
-            if (positionRight.position.x < transform.position.x || positionLeft.position.x > transform.position.x)
+            //if it is going to the right
+            if (direction.Equals(Vector2.right))
             {
-                direction *= -1;//invert direction
-                //This kind of code is one of the reasons I avoid negative scales.
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                //The following code is necessary to make the gun rotate/position correctly
-                gunJoint.localScale = new Vector3(-gunJoint.localScale.x, gunJoint.localScale.y, gunJoint.localScale.z);
-                gunJoint.Rotate(Vector3.forward * 180.0f, Space.World);
+                //if it is beyond the limit
+                if (positionRight.position.x < transform.position.x) {
+                    GoToLeft();
+                }
+            }
+            //if it is going to the left
+            if (direction.Equals(Vector2.left))
+            {
+                if (positionLeft.position.x > transform.position.x) {
+                    GoToRight();
+                }
             }
             transform.position += (Vector3)direction * speed * Time.deltaTime;
         }
+    }
+
+    private void GoToLeft()
+    {
+        direction = Vector2.left;//invert direction
+        transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        //The following code is necessary to make the gun rotate/position correctly
+        gunJoint.localScale = new Vector3(-Mathf.Abs(gunJoint.localScale.x), gunJoint.localScale.y, gunJoint.localScale.z);
+        gunJoint.rotation = Quaternion.Euler(0, 0, 180);
+    }
+    private void GoToRight()
+    {
+        direction = Vector2.right;//invert direction
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        //The following code is necessary to make the gun rotate/position correctly
+        gunJoint.localScale = new Vector3(Mathf.Abs(gunJoint.localScale.x), gunJoint.localScale.y, gunJoint.localScale.z);
+        gunJoint.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     private void Walk()
