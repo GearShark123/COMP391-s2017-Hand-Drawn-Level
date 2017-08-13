@@ -43,5 +43,11 @@ public class SwordBehaviour : MonoBehaviour
         {
             hit = true;
         }
+        if (collision.collider.tag =="Enemy")
+        {
+            Health health = collision.gameObject.GetComponent<Health>();
+            health.DamageTaken(damage, 0.0f, () => Destroy(collision.gameObject));
+            time = 0.0f;
+        }
     }
 }
