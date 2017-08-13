@@ -14,6 +14,7 @@ public class Enemy1Behaviour : MonoBehaviour {
     private bool isWalking;
     private GunBehaviour gun;
     private Transform gunJoint;
+    private float touchDamage;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +27,7 @@ public class Enemy1Behaviour : MonoBehaviour {
         InvokeRepeating("Stop", 2.1f, 2.5f);
         gun = GetComponentInChildren<GunBehaviour>();
         gunJoint = gun.transform.parent;
+        touchDamage = gun.projectile.GetComponent<EnemyProjectileBehaviour>().damage;
     }
 
     void FixedUpdate()
@@ -80,5 +82,14 @@ public class Enemy1Behaviour : MonoBehaviour {
     }
     private void Shoot() {
         gun.Shoot();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Health health = collision.gameObject.GetComponent<Health>();
+            health.DamageTaken(touchDamage, 0.0f, () => Destroy(collision.gameObject));
+        }
     }
 }
