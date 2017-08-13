@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
 {
     public float healthPoints;
     public GameObject redScreen;
+    private float maxHealth;
     private GameObject playerCamera;
 
     private bool IsImmune { set; get; }
@@ -18,6 +19,7 @@ public class Health : MonoBehaviour
     {
         playerCamera = GameObject.Find("Main Camera");
         IsImmune = false;
+        maxHealth = healthPoints;
     }
 
     void DisplayRedScreen(float damage)
@@ -29,6 +31,11 @@ public class Health : MonoBehaviour
                     Instantiate(redScreen, playerCamera.transform);                                        
             }           
         }
+    }
+
+    internal bool IsFull()
+    {
+        return healthPoints>=maxHealth;
     }
 
     public void HealthRegen(float healthRegenPoints)

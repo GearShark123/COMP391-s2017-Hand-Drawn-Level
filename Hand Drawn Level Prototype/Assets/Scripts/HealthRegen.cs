@@ -7,10 +7,9 @@ public class HealthRegen : MonoBehaviour {
     public float timeAdded;
     private float time;
     public float timeLimit;
+    public float healthRegenNum = 1;
 
     private GameObject player;
-    private float healthLimit = 10;
-    private float healthRegenNum = 1;
 
     void Start()
     {
@@ -23,13 +22,16 @@ public class HealthRegen : MonoBehaviour {
 
         if (time >= timeLimit)
         {
-            Health health = player.GetComponent<Health>();
-            if (health.healthPoints < healthLimit)
+            if (player)
             {
-                health.HealthRegen(healthRegenNum);
+                Health health = player.GetComponent<Health>();
+                if (!health.IsFull())
+                {
+                    health.HealthRegen(healthRegenNum);
+                }
+                Destroy(this.gameObject);
+                time = 0.0f;
             }
-            Destroy(this.gameObject);
-            time = 0.0f;
         }
 	}
 }

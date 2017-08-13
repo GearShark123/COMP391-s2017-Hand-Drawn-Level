@@ -1,13 +1,58 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckPointBehaviour : MonoBehaviour {
+    public PlayerControls player;
+    public bool lastCheckpoint;
 
-    // Use this for initialization
-    private void Spawn(GameObject gameObject) {
-        gameObject.transform.position = transform.position;
-        gameObject.SetActive(true);
+    private PlayerControls currentPlayer;
+    private CheckPointBehaviour[] checkpoints;
+    private new CameraFollower camera;
+
+    private void Start()
+    {
+        currentPlayer = GameObject.FindObjectOfType<PlayerControls>();
+        checkpoints = GameObject.FindObjectsOfType<CheckPointBehaviour>();
+        camera = GameObject.FindObjectOfType<CameraFollower>();
+    }
+
+    private void Update()
+    {
+        if (currentPlayer==null && lastCheckpoint) {
+            SetupNewPlayer();
+        }
+    }
+
+    private void SetupNewPlayer()
+    {
+        Spawn();
+        foreach (CheckPointBehaviour checkpoint in checkpoints)
+        {
+            checkpoint.currentPlayer = this.currentPlayer;
+        }
+        foreach (Transform redScreen in camera.transform)
+        {
+            redScreen.gameObject.SetActive(false);
+            Destroy(redScreen.gameObject);
+        }
+        camera.target = currentPlayer.transform;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player")) {
+            foreach (CheckPointBehaviour checkpoint in checkpoints) {
+                checkpoint.lastCheckpoint = false;
+            }
+            this.lastCheckpoint = true;
+        }
+    }
+
+
+    private void Spawn() {
+        currentPlayer = Instantiate<PlayerControls>(player, transform.position, transform.rotation);
     }
 
     private void OnDrawGizmos()
