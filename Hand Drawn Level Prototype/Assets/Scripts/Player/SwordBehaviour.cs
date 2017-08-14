@@ -49,7 +49,7 @@ public class SwordBehaviour : MonoBehaviour
         {
             Health health = collision.gameObject.GetComponent<Health>();
             health.DamageTaken(damage, 0.0f, () => {
-                    gameManager.KilledEnemy();
+                    if (gameManager) gameManager.KilledEnemy();
                     Destroy(collision.gameObject);
                 });
             time = 0.0f;
