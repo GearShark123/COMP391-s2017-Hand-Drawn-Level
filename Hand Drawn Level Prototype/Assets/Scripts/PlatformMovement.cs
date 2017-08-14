@@ -18,6 +18,8 @@ public class PlatformMovement : MonoBehaviour
     {
         Vector3 v = startPos;
         v.x += delta * Mathf.Sin(Time.time * speed);
+        v.y += delta * Mathf.Cos(Time.time * speed);
+        v.y = Mathf.Min(startPos.y,v.y);
         transform.position = v;
     }
 
