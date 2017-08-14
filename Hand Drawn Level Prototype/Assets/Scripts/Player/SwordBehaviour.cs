@@ -9,10 +9,7 @@ public class SwordBehaviour : MonoBehaviour
     public float speed = 1.0f;
     public float damage;
     private bool hit;
-
-    private float time;
-    private float timeAdded = 0.1f;
-    private float timeLimit = 0.2f;
+    
     private GameManagerBehaviour gameManager;
 
     // Use this for initialization
@@ -26,7 +23,6 @@ public class SwordBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time += timeAdded;
         if (hit == false)
         {
             Vector3 direction = transform.right.normalized;
@@ -35,16 +31,12 @@ public class SwordBehaviour : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision)
-    {        
-        if (collision.collider.tag != "Player" && collision.collider.tag != "IgnorePortal")
-        {
-            //print(collision.collider);
-            hit = true;
-        }
-        if (time >= timeLimit)
-        {
-            hit = true;
-        }
+    {
+        if (collision.collider.tag == "Player" || collision.collider.tag == "IgnorePortal")
+            return;
+
+        hit = true;
+        this.transform.parent = collision.transform;
         if (collision.collider.tag =="Enemy")
         {
             Health health = collision.gameObject.GetComponent<Health>();
@@ -52,7 +44,6 @@ public class SwordBehaviour : MonoBehaviour
                     if (gameManager) gameManager.KilledEnemy();
                     Destroy(collision.gameObject);
                 });
-            time = 0.0f;
         }
     }
 }
