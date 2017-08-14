@@ -13,12 +13,14 @@ public class SwordBehaviour : MonoBehaviour
     private float time;
     private float timeAdded = 0.1f;
     private float timeLimit = 0.2f;
+    private GameManagerBehaviour gameManager;
 
     // Use this for initialization
     void Start()
     {
         Destroy(this.gameObject, timeToDestroy);
         hit = false;
+        gameManager = GameObject.FindObjectOfType<GameManagerBehaviour>();
     }
 
     // Update is called once per frame
@@ -46,7 +48,10 @@ public class SwordBehaviour : MonoBehaviour
         if (collision.collider.tag =="Enemy")
         {
             Health health = collision.gameObject.GetComponent<Health>();
-            health.DamageTaken(damage, 0.0f, () => Destroy(collision.gameObject));
+            health.DamageTaken(damage, 0.0f, () => {
+                    gameManager.KilledEnemy();
+                    Destroy(collision.gameObject);
+                });
             time = 0.0f;
         }
     }

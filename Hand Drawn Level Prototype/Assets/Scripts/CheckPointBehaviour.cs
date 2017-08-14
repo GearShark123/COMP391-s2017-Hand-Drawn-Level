@@ -10,12 +10,14 @@ public class CheckPointBehaviour : MonoBehaviour {
     private PlayerControls currentPlayer;
     private CheckPointBehaviour[] checkpoints;
     private new CameraFollower camera;
+    private GameManagerBehaviour gameManager;
 
     private void Start()
     {
         currentPlayer = GameObject.FindObjectOfType<PlayerControls>();
         checkpoints = GameObject.FindObjectsOfType<CheckPointBehaviour>();
         camera = GameObject.FindObjectOfType<CameraFollower>();
+        gameManager = GameObject.FindObjectOfType<GameManagerBehaviour>();
     }
 
     private void Update()
@@ -38,6 +40,7 @@ public class CheckPointBehaviour : MonoBehaviour {
             Destroy(redScreen.gameObject);
         }
         camera.target = currentPlayer.transform;
+        if (gameManager) gameManager.PlayerDied();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
