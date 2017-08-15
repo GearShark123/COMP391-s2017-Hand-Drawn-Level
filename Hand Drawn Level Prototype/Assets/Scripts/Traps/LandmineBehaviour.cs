@@ -12,12 +12,10 @@ public class LandmineBehaviour : MonoBehaviour {
     #region _PlayerCollision_
     private void PlayerCollision(Collider2D collision)
     {
-        // print(time);
         if (collision.CompareTag("Player"))
         {
             Health health = collision.GetComponent<Health>();
             health.DamageTaken(damage, 0.0f, () => Destroy(collision.gameObject));
-            //time = 0.0f;
         }
     }
     #endregion

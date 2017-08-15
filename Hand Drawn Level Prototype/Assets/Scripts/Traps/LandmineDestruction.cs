@@ -7,13 +7,14 @@ public class LandmineDestruction : MonoBehaviour
     public GameObject manager;
     public GameObject explosion;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "SwordProjectile(Clone)")
+        if (collision.gameObject.CompareTag("Sword"))
         {
-            //print("Hit");
             Instantiate(explosion, manager.transform);
             Destroy(this.gameObject);
         }
+
     }
+    
 }
