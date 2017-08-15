@@ -11,7 +11,7 @@ public class SwordBehaviour : MonoBehaviour
     private bool hit;
     
     private GameManagerBehaviour gameManager;
-    private Collider2D collider;
+    private new Collider2D collider;
     // Use this for initialization
     void Start()
     {
