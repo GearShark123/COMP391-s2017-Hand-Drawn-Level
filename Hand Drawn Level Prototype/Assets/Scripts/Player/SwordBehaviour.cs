@@ -11,13 +11,14 @@ public class SwordBehaviour : MonoBehaviour
     private bool hit;
     
     private GameManagerBehaviour gameManager;
-
+    private Collider2D collider;
     // Use this for initialization
     void Start()
     {
         Destroy(this.gameObject, timeToDestroy);
         hit = false;
         gameManager = GameObject.FindObjectOfType<GameManagerBehaviour>();
+        collider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -36,6 +37,8 @@ public class SwordBehaviour : MonoBehaviour
             return;
 
         hit = true;
+        collider.enabled = false;
+
         this.transform.parent = collision.transform;
         if (collision.collider.tag =="Enemy")
         {
