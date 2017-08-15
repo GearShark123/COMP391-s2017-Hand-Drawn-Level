@@ -6,8 +6,8 @@ using UnityEngine;
 public class CheckPointBehaviour : MonoBehaviour {
     public PlayerControls player;
     public bool lastCheckpoint;
+    public PlayerControls currentPlayer;
 
-    private PlayerControls currentPlayer;
     private CheckPointBehaviour[] checkpoints;
     private new CameraFollower camera;
     private GameManagerBehaviour gameManager;

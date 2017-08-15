@@ -5,22 +5,32 @@ using UnityEngine;
 public class BossBehaviour : MonoBehaviour {
 
     public float speed = 1.0f;
-    public float distanceToPlayer = 2.0f;
+    public float minDistanceToPlayer = 2.0f;
+    public float maxDistanceToPlayer = 25.0f;
+    public float maxDistanceFromDungeon = 30;
 
     private Animator animator;
+    private Vector3 initialPosition;
 
-    private GameObject player;
+    private CheckPointBehaviour checkpoint;
 
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
+        checkpoint = GameObject.FindObjectOfType<CheckPointBehaviour>();
+        initialPosition = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (player) {
-            float directionX = player.transform.position.x - transform.position.x;
-            if (Mathf.Abs(directionX) >= distanceToPlayer)
+        if (checkpoint.currentPlayer != null) {
+            float directionX = checkpoint.currentPlayer.transform.position.x - transform.position.x;
+            if (directionX < 0 && (transform.position - initialPosition).magnitude > maxDistanceFromDungeon)
+            {
+                animator.SetBool("IsWalking", false);
+                return;
+            }
+            if (Mathf.Abs(directionX) >= minDistanceToPlayer && Mathf.Abs(directionX) <= maxDistanceToPlayer)
             {
                 animator.SetBool("IsWalking", true);
                 transform.position += Vector3.right * (directionX) * speed * Time.deltaTime;
@@ -40,19 +50,4 @@ public class BossBehaviour : MonoBehaviour {
             }
         }
 	}
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player")) {
-            player = collision.gameObject;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player")) {
-            player = null;
-            animator.SetBool("IsWalking", false);
-        }
-    }
 }
