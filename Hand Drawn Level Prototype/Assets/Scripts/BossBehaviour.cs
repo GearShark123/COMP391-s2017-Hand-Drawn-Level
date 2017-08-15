@@ -13,12 +13,14 @@ public class BossBehaviour : MonoBehaviour {
     private Vector3 initialPosition;
 
     private CheckPointBehaviour checkpoint;
+    private GameManagerBehaviour gameManager;
 
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
         checkpoint = GameObject.FindObjectOfType<CheckPointBehaviour>();
         initialPosition = transform.position;
+        gameManager = GameObject.FindObjectOfType<GameManagerBehaviour>();
 	}
 	
 	// Update is called once per frame
@@ -50,4 +52,9 @@ public class BossBehaviour : MonoBehaviour {
             }
         }
 	}
+
+    private void OnDestroy()
+    {
+        gameManager.FinishGame();
+    }
 }
