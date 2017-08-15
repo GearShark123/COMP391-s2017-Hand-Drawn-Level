@@ -8,35 +8,28 @@ public class SwordBehaviour : MonoBehaviour
     public float timeToDestroy = 5.0f;
     public float speed = 1.0f;
     public float damage;
-    private bool hit;
     
+
     private GameManagerBehaviour gameManager;
     private new Collider2D collider;
+    private new Rigidbody2D rigidbody;
     // Use this for initialization
     void Start()
     {
         Destroy(this.gameObject, timeToDestroy);
-        hit = false;
         gameManager = GameObject.FindObjectOfType<GameManagerBehaviour>();
         collider = GetComponent<Collider2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody.velocity = transform.right.normalized * speed;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (hit == false)
-        {
-            Vector3 direction = transform.right.normalized;
-            transform.position += direction * speed * Time.deltaTime;
-        }
-    }
+    
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player" || collision.collider.tag == "IgnorePortal")
             return;
-
-        hit = true;
+        
+        rigidbody.velocity = Vector3.zero;
         collider.enabled = false;
 
         this.transform.parent = collision.transform;
