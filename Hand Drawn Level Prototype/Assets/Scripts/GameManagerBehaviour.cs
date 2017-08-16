@@ -26,7 +26,11 @@ public class GameManagerBehaviour : MonoBehaviour {
             finishGame = false;
             FinishGame();
         }
+        if (Input.GetKeyUp(KeyCode.R)) {
+            TryAgain();
+        }
 	}
+
 
     public void FinishGame() {
         //time
