@@ -16,7 +16,7 @@ public class HealthRegen : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void Update ()
+    void FixedUpdate ()
     {
         time += timeAdded;
 
